@@ -22,7 +22,7 @@ for homepage in home:
         metadata["type"] = "homepage"
         content = markdown.markdown(file_data.content)
         home_data.append({"metadata": metadata, "content": content})
-print(home_data)
+# print(home_data)
 
 article_data = []
 for article in articles:
@@ -33,7 +33,7 @@ for article in articles:
         metadata["type"] = "article"
         content = markdown.markdown(file_data.content)
         article_data.append({"metadata": metadata, "content": content})
-print(article_data)
+# print(article_data)
 
 video_data = []
 for video in videos:
@@ -44,7 +44,7 @@ for video in videos:
         metadata["type"] = "video"
         content = markdown.markdown(file_data.content)
         video_data.append({"metadata": metadata, "content": content})
-print(video_data)
+# print(video_data)
 
 
 about_data = []
@@ -56,7 +56,7 @@ for aboutme in about:
         metadata["type"] = "aboutme"
         content = markdown.markdown(file_data.content)
         about_data.append({"metadata": metadata, "content": content})
-print(about_data)
+# print(about_data)
 
 
 error_data = []
@@ -83,6 +83,7 @@ for erro in error:
 
 env = Environment(loader=FileSystemLoader("./templates"))
 template = env.get_template("home.html")
+
 all_data = article_data + video_data + about_data + error_data
 all_metadata = [data["metadata"] for data in all_data]
 
@@ -94,3 +95,11 @@ rendered_template = template.render(data=all_metadata)
 os.makedirs("dist", exist_ok=True)
 with open("dist/index.html", "w") as f:
     f.write(rendered_template)
+
+for data in all_data:
+    type = data["metadata"]["type"]
+    template = env.get_template(f"{type}.html")
+    rendered_template = template.render(data=data)
+    os.makedirs(f"dist/{type}", exist_ok=True)
+    with open(f"dist/{type}/{data['metadata']['slug']}.html", "w") as f:
+        f.write(rendered_template)
