@@ -8,14 +8,14 @@
     {% if post.type == 'video' %}
     <li>
         <span class="tag tag-video">Video</span>
-        <a href="/video/{{ post.slug }}">{{ post.title }}</a>
+        <a href="/video/{{ post.slug }}.html">{{ post.title }}</a>
 
     </li>
     {% endif %}
     {% if post.type == 'article' %}
     <li>
         <span class="tag tag-article">Article</span>
-        <a href="/article/{{ post.slug }}">{{ post.title }}</a>
+        <a href="/article/{{ post.slug }}.html">{{ post.title }}</a>
     
     </li>
     {% endif %}
