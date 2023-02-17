@@ -69,10 +69,28 @@ for erro in error:
         content = markdown.markdown(file_data.content)
         error_data.append({"metadata": metadata, "content": content})
 
+# env = Environment(loader=FileSystemLoader("./templates"))
+# template = env.get_template("home.html")
+# all_data = article_data + video_data + about_data + error_data
+# all_metadata = [data["metadata"] for data in all_data]
+# all_metadata.sort(key=lambda x: x["date"], reverse=True)
+
+
+# rendered_template = template.render(data=all_metadata)
+# os.makedirs("dist", exist_ok=True)
+# with open("dist/index.html", "w") as f:
+#     f.write(rendered_template)
+
 env = Environment(loader=FileSystemLoader("./templates"))
 template = env.get_template("home.html")
+all_data = article_data + video_data + about_data + error_data
+all_metadata = [data["metadata"] for data in all_data]
 
-rendered_template = template.render()
+# Only sort the list if the date key exists in each dictionary
+if all("date" in metadata for metadata in all_metadata):
+    all_metadata.sort(key=lambda x: x["date"], reverse=True)
+
+rendered_template = template.render(data=all_metadata)
 os.makedirs("dist", exist_ok=True)
 with open("dist/index.html", "w") as f:
     f.write(rendered_template)
