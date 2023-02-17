@@ -2,13 +2,15 @@ import os
 import markdown
 import frontmatter
 from slugify import slugify
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2.loaders import FileSystemLoader
+
 
 home = [f for f in os.listdir("data/home") if os.path.isfile(os.path.join("data/home", f))]
 about = [f for f in os.listdir("data/about") if os.path.isfile(os.path.join("data/about", f))]
 articles = [f for f in os.listdir("data/articles") if os.path.isfile(os.path.join("data/articles", f))]
 videos = [f for f in os.listdir("data/videos") if os.path.isfile(os.path.join("data/videos", f))]
-error = [f for f in os.listdir("data/videos") if os.path.isfile(os.path.join("data/videos", f))]
+error = [f for f in os.listdir("data/error") if os.path.isfile(os.path.join("data/videos", f))]
 
 
 home_data = []
@@ -66,4 +68,11 @@ for erro in error:
         metadata["type"] = "erro"
         content = markdown.markdown(file_data.content)
         error_data.append({"metadata": metadata, "content": content})
-print(error_data)
+
+env = Environment(loader=FileSystemLoader("./templates"))
+template = env.get_template("home.html")
+
+rendered_template = template.render()
+os.makedirs("dist", exist_ok=True)
+with open("dist/index.html", "w") as f:
+    f.write(rendered_template)
