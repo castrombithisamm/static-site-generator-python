@@ -11,11 +11,13 @@ Before you can use the Static Site Generator, you'll need to make sure that you 
 
 Python 3
 Git
+
 If you don't have these installed already, you can download them from their respective websites:
 
 Python 3: https://www.python.org/downloads/
 Git: https://git-scm.com/downloads
-Installation
+
+# Installation
 To install the Static Site Generator, you'll need to follow these steps:
 
 Open a terminal window on your machine.
