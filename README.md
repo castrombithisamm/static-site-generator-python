@@ -37,7 +37,7 @@ This will generate your static site in the output directory.
 
 To customize the look and feel of your site, you can modify the templates in the templates directory.
 
-# Contributing
+# Contributing.
 If you'd like to contribute to this project, please fork the repository and submit a pull request. I welcome any and all contributions!
 
 # Contact
