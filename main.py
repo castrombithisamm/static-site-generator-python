@@ -10,6 +10,18 @@ articles = [f for f in os.listdir("data/articles") if os.path.isfile(os.path.joi
 videos = [f for f in os.listdir("data/videos") if os.path.isfile(os.path.join("data/videos", f))]
 error = [f for f in os.listdir("data/videos") if os.path.isfile(os.path.join("data/videos", f))]
 
+
+home_data = []
+for homepage in home:
+    with open(f"data/home/{homepage}", "r") as f:
+        file_data = frontmatter.load(f)
+        metadata = file_data.metadata
+        metadata["slug"] = slugify(metadata["title"])
+        metadata["type"] = "homepage"
+        content = markdown.markdown(file_data.content)
+        home_data.append({"metadata": metadata, "content": content})
+print(home_data)
+
 article_data = []
 for article in articles:
     with open(f"data/articles/{article}", "r") as f:
@@ -27,7 +39,31 @@ for video in videos:
         file_data = frontmatter.load(f)
         metadata = file_data.metadata
         metadata["slug"] = slugify(metadata["title"])
-        metadata["type"] = "article"
+        metadata["type"] = "video"
         content = markdown.markdown(file_data.content)
-        article_data.append({"metadata": metadata, "content": content})
-print(article_data)
+        video_data.append({"metadata": metadata, "content": content})
+print(video_data)
+
+
+about_data = []
+for aboutme in about:
+    with open(f"data/about/{aboutme}", "r") as f:
+        file_data = frontmatter.load(f)
+        metadata = file_data.metadata
+        metadata["slug"] = slugify(metadata["title"])
+        metadata["type"] = "aboutme"
+        content = markdown.markdown(file_data.content)
+        about_data.append({"metadata": metadata, "content": content})
+print(about_data)
+
+
+error_data = []
+for erro in error:
+    with open(f"data/error/{erro}", "r") as f:
+        file_data = frontmatter.load(f)
+        metadata = file_data.metadata
+        metadata["slug"] = slugify(metadata["title"])
+        metadata["type"] = "erro"
+        content = markdown.markdown(file_data.content)
+        error_data.append({"metadata": metadata, "content": content})
+print(error_data)
