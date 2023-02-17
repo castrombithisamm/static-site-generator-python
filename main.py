@@ -103,3 +103,9 @@ for data in all_data:
     os.makedirs(f"dist/{type}", exist_ok=True)
     with open(f"dist/{type}/{data['metadata']['slug']}.html", "w") as f:
         f.write(rendered_template)
+
+os.makedirs("dist/static", exist_ok=True)
+for file in os.listdir("static"):
+    with open(f"static/{file}", "r") as f:
+        with open(f"dist/static/{file}", "w") as f2:
+            f2.write(f.read())
