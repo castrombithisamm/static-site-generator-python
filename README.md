@@ -6,7 +6,7 @@ This documentation will provide a comprehensive guide on how to install, configu
 
 # Getting Started
 
-Prerequisites
+# Prerequisites
 Before you can use the Static Site Generator, you'll need to make sure that you have the following software installed on your machine:
 
 Python 3
